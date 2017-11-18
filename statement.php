@@ -170,6 +170,9 @@ function w3_close() {
     overlayBg.style.display = "none";
 }
 </script>
-
+  <footer class="w3-container w3-padding-16 w3-light-grey">
+    <h4>Managed By</h4>
+    <p><a href="mailto:premudeshi99@gmail.com">Vital Water</a></p>
+  </footer>
 </body>
 </html>
