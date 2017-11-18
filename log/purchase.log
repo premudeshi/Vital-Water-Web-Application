@@ -1,0 +1,28 @@
+[2017-11-08 09:33:35] name.WARNING: Foo [] []
+[2017-11-08 09:33:35] name.ERROR: Bar [] []
+[2017-11-08 09:35:07] purchase.WARNING: Foo [] []
+[2017-11-08 09:35:07] purchase.ERROR: Bar [] []
+[2017-11-08 09:42:31] files.DEBUG: I am debug  
+[2017-11-08 09:42:31] files.ERROR: I am error {"productId":123} 
+[2017-11-08 09:42:31] files.ERROR: I am error {"productId":123} 
+[2017-11-08 09:43:43] files.DEBUG: I am debug  
+[2017-11-08 09:43:43] files.ERROR: I am error {"productId":123} 
+[2017-11-08 09:43:43] files.ERROR: I am error {"productId":123} 
+[2017-11-08 09:44:30] files.DEBUG: I am debug  
+[2017-11-08 09:44:30] files.ERROR: I am error {"productId":123} 
+[2017-11-08 09:44:30] files.ERROR: I am error {"productId":123} 
+[2017-11-08 09:48:18] files.INFO: I am debug  
+[2017-11-08 09:48:18] files.ERROR: I am error {"productId":123} 
+[2017-11-08 09:48:18] files.ERROR: I am error {"productId":123} 
+[2017-11-18 14:40:09] files.INFO: I am debug  
+[2017-11-18 14:40:10] files.ERROR: I am error {"productId":123} 
+[2017-11-18 14:40:10] files.ERROR: I am error {"productId":123} 
+[2017-11-18 15:14:01] files.INFO: I am debug  
+[2017-11-18 15:14:01] files.ERROR: I am error {"productId":123} 
+[2017-11-18 15:14:01] files.ERROR: I am error {"productId":123} 
+[2017-11-18 15:14:05] files.INFO: I am debug  
+[2017-11-18 15:14:05] files.ERROR: I am error {"productId":123} 
+[2017-11-18 15:14:05] files.ERROR: I am error {"productId":123} 
+[2017-11-18 17:23:02] files.INFO: I am debug  
+[2017-11-18 17:23:02] files.ERROR: I am error {"productId":123} 
+[2017-11-18 17:23:02] files.ERROR: I am error {"productId":123} 

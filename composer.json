@@ -1,0 +1,8 @@
+{
+    "require": {
+        "phpmailer/phpmailer": "^6.0",
+        "monolog/monolog": "^1.23",
+        "pulse00/monolog-parser": "^0.0.3",
+        "ddtraceweb/monolog-parser": "^1.2"
+    }
+}
