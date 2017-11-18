@@ -7,9 +7,9 @@ use Monolog\Handler\StreamHandler;
 $log = new Logger('index');
 $log->pushHandler(new StreamHandler('log/master.log', Logger::WARNING));
 
-
-$link = mysql_connect("localhost", "root", "");
-mysql_select_db("merchant", $link);
+require "dbconf.php"; 
+$link = mysql_connect($servername, $username, $password);
+mysql_select_db($dbname, $link);
 $log->warning('Connected To Database');
 
 $result = mysql_query("SELECT * FROM log", $link);

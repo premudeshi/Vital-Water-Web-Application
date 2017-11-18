@@ -104,15 +104,7 @@ function test_input($data) {
   return $data;
 }
 
-
-
-
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "merchant";
-
+require "dbconf.php"; 
 
 
 $dbhandle = mysql_connect($servername, $username, $password) 

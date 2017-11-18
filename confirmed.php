@@ -103,14 +103,7 @@ function test_input($data) {
 parse_str($string);
 
 
-
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "merchant";
-
-
+require "dbconf.php"; 
 
 $dbhandle = mysql_connect($servername, $username, $password) 
   or die("Unable to connect to MySQL");

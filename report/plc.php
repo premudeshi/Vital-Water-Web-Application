@@ -1,6 +1,7 @@
 <?php  
 //export.php  
-$connect = mysqli_connect("localhost", "root", "", "merchant");
+require "dbconf.php"; 
+$connect = mysqli_connect($servername, $username, $password, $dbname);
 $output = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
