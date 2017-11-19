@@ -1,24 +1,20 @@
 <?php require "login/loginheader.php"; 
 $user = $_SESSION['username'];
 require "vendor/autoload.php"; 
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
 
-$log = new Logger('index');
-$log->pushHandler(new StreamHandler('log/master.log', Logger::WARNING));
 
 require "dbconf.php"; 
 $link = mysql_connect($servername, $username, $password);
 mysql_select_db($dbname, $link);
-$log->warning('Connected To Database');
+
 
 $result = mysql_query("SELECT * FROM log", $link);
 $num_rows = mysql_num_rows($result);
-$log->warning('Connected to Database');
+
 
 $result1 = mysql_query("SELECT * FROM card", $link);
 $num_rows1 = mysql_num_rows($result1);
-$log->warning('Connected to Database');
+
 
 
 
