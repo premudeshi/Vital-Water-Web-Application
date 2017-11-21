@@ -165,6 +165,12 @@ else {
 echo "<h1>Please Wait, Water is being Filled. </h1>";
 echo '<i class="fa fa-refresh fa-spin fa-5x fa-fw"></i>';
 
+if ($package == '250') {
+  system('python 250.py');
+}
+elseif ($package == '500.py') {
+  system('python 500.py');
+}
 }
 
 ?>
