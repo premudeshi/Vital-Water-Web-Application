@@ -6,7 +6,7 @@ import serial
 import time
 ser = serial.Serial('/dev/Vital-Water-Master', 9600)
 time.sleep(2)
-ser.write('a')
+ser.write('d')
 count = 0
 time.sleep(1)
 readcomplete = ser.read(3)
