@@ -165,12 +165,24 @@ else {
 echo "<h1>Please Wait, Water is being Filled. </h1>";
 echo '<i class="fa fa-refresh fa-spin fa-5x fa-fw"></i>';
 
-if ($package == '250') {
-  system('python 250.py');
+
+switch ($package) {
+    case "250":
+        echo exec('python 250.py');
+        break;
+    case "500":
+        echo exec('python 500.py');
+        break;
+    case "750":
+        echo exec('python 750.py');
+        break;
+    case "1000":
+        echo exec('python 1000.py');
+        break;
+    default:
+        echo "An Error occured: Select package";
 }
-elseif ($package == '500.py') {
-  system('python 500.py');
-}
+
 }
 
 ?>
