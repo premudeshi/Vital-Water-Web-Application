@@ -1,6 +1,9 @@
 <?php require "login/loginheader.php"; 
 $user = $_SESSION['username'];
-require "vendor/autoload.php"; 
+require "vendor/autoload.php";
+
+echo exec('sudo chmod 666 /dev/Vital-Water-Master');
+ 
 ?>
 
 <!DOCTYPE html>
