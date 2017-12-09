@@ -1,4 +1,4 @@
-<?php require "../login/loginheader.php"; 
+<?php require "login/loginheader.php"; 
 $user = $_SESSION['username'];
 require "vendor/autoload.php"; 
 
