@@ -1,6 +1,6 @@
-<?php require "login/loginheader.php"; 
+<?php require "../login/loginheader.php"; 
 $user = $_SESSION['username'];
-require "vendor/autoload.php"; 
+require "../vendor/autoload.php"; 
 ?>
 
 <!DOCTYPE html>
@@ -8,13 +8,13 @@ require "vendor/autoload.php";
 <title>Vital Water Gateway</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/w3.css">
-<link rel="stylesheet" href="css/google.css">
-<link rel="stylesheet" href="css/font-awesome.css">
+<link rel="stylesheet" href="../css/w3.css">
+<link rel="stylesheet" href="../css/google.css">
+<link rel="stylesheet" href="../css/font-awesome.css">
 <style>
 @font-face {
 font-family: FontAwsome;
-src: url(/fonts/FontAwesome.otf);
+src: url(../fonts/FontAwesome.otf);
 }
 
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}

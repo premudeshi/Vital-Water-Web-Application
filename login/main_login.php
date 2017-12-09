@@ -3,6 +3,9 @@ session_start();
 if (isset($_SESSION['username'])) {
     header("location:../index.php");
 }
+
+echo exec('sudo chmod 666 /dev/Vital-Water-Master');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

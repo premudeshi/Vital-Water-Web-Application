@@ -1,9 +1,6 @@
-<?php require "login/loginheader.php"; 
+<?php require "../login/loginheader.php"; 
 $user = $_SESSION['username'];
-require "vendor/autoload.php";
-
-echo exec('sudo chmod 666 /dev/Vital-Water-Master');
- 
+require "../vendor/autoload.php"; 
 ?>
 
 <!DOCTYPE html>
@@ -11,34 +8,36 @@ echo exec('sudo chmod 666 /dev/Vital-Water-Master');
 <title>Vital Water Gateway</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/w3.css">
-<link rel="stylesheet" href="css/google.css">
-<link rel="stylesheet" href="css/font-awesome.css">
+<link rel="stylesheet" href="../css/w3.css">
+<link rel="stylesheet" href="../css/google.css">
+<link rel="stylesheet" href="../css/font-awesome.css">
 <style>
-@font-face {
-font-family: FontAwsome;
-src: url(/fonts/FontAwesome.otf);
-}
-
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
-#button {
-    font-family: FontAwesome;
+<style>
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
 }
 
-
-input[type=submit] {
-    background: transparent url("path/to/image.jpg") 0 0 no-repeat;
-    font-weight: bold;
-    display: inline-block;
-    text-align: center;
-    cursor: pointer;
-    height: 331px; /* height of the background image */
-    width: 500px; /* width of the background image */
-    border: 5px solid #fff;
-    border-radius: 4em;
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
 }
 
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+</style>
 </style>
 <body class="w3-light-grey">
 <head>
@@ -70,9 +69,9 @@ input[type=submit] {
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
     <a href="index.php" class="w3-bar-item w3-button w3-padding "><i class="fa fa-users fa-fw"></i>  Overview</a>
-    <a href="purchase.php" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-money fa-fw"></i>  Purchase</a>
+    <a href="purchase.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-money fa-fw"></i>  Purchase</a>
     <a href="balance.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-newspaper-o fa-fw"></i>  Balance</a>
-    <a href="statement.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-line-chart fa-fw"></i>  Statement</a>
+    <a href="statement.php" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-line-chart fa-fw"></i>  Statement</a>
     <a href="news.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  News</a>
   </div>
 </nav>
@@ -80,79 +79,73 @@ input[type=submit] {
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
-
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
 
   <!-- Header -->
-  <form action="card.php" method="post">
   <header class="w3-container" style="padding-top:22px">
-    <h5><b><span class="fa fa-money"></span> Purchase</b></h5>
+    <h5><b><i class="fa fa-bar-chart"></i> Statement</b></h5>
   </header>
 
-  <div class="w3-row-padding w3-margin-bottom">
-    <div class="w3-quarter">
-      <div class="w3-container w3-light-blue w3-padding-16">
-        <div class="w3-left"><i class="fa fa-tint w3-xxxlarge"></i></div>
-        <div class="w3-right">
-          <h3>250 mL</h3>
-        </div>
-        <div class="w3-clear"></div>
-        <h4>Drinking Water</h4>
-        <h2>Tsh 250</h2>
-        <button name="choose" value="250" type="submit" class="btn btn-default">
-                    <i class="fa fa-glass"></i> Drink Now
-                </button>
-      </div>
-    </div>
+  <div class="w3-container">
+    <h5>Download Reports</h5>
+    <ul class="w3-ul w3-card-4 w3-white">
+      <li class="w3-padding-16">
+        <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
+        <span class="w3-xlarge">Purchase Log</span><br>
+        <span class="w3-large">Ecxel File Format</span><br>
+        <form method="post" action="report/pl.php"><button type="submit" name="export" class="w3-button w3-dark-grey">Download  <i class="fa fa-download"></i></button></form>
+      </li>
+          <li class="w3-padding-16">
+        <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
+        <form method="post" action="report/plc.php">
+        <span class="w3-xlarge">Purchase Log Based on Card</span><br>
+        <span class="w3-large">Card Number: <input type="password" name="number"></span><br>
+        <span class="w3-large">Ecxel File Format</span><br>
+        <button type="submit" name="export" class="w3-button w3-dark-grey">Download  <i class="fa fa-download"></i></button></form>
+      </li>
 
-    <div class="w3-quarter">
-      <div class="w3-container w3-cyan w3-padding-16">
-        <div class="w3-left"><i class="fa fa-tint w3-xxxlarge"></i></div>
-        <div class="w3-right">
-          <h3>500 mL</h3>
-        </div>
-        <div class="w3-clear"></div>
-        <h4>Drinking Water</h4>
-        <h2>Tsh 500</h2>
-      <button name="choose" value="500" type="submit" class="btn btn-default">
-                    <i class="fa fa-glass"></i> Drink Now
-                </button>
-      </div>
-    </div>
-    <div class="w3-quarter">
-      <div class="w3-container w3-blue w3-padding-16">
-        <div class="w3-left"><i class="fa fa-tint w3-xxxlarge"></i></div>
-        <div class="w3-right">
-          <h3>750 mL</h3>
-        </div>
-        <div class="w3-clear"></div>
-        <h4>Drinking Water</h4>
-        <h2>Tsh 750</h2>
-        <button name="choose" value="750" type="submit" class="btn btn-default">
-                    <i class="fa fa-glass"></i> Drink Now
-                </button>
-      </div>
-    </div>
-    <div class="w3-quarter">
-      <div class="w3-container w3-indigo w3-text-white w3-padding-16">
-        <div class="w3-left"><i class="fa fa-tint w3-xxxlarge"></i></div>
-        <div class="w3-right">
-          <h3>1 Litre</h3>
-        </div>
-        <div class="w3-clear"></div>
-        <h4>Drinking Water</h4>
-        <h2>Tsh 1000</h2>
-        <button name="choose" value="1000" type="submit" class="btn btn-default">
-                    <i class="fa fa-glass"></i> Drink Now
-                </button>
-      </div>
-    </div>
+    </ul>
   </div>
+  <hr>
+<div class="w3-container">
+<?php
+require "dbconf.php"; 
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+
+$sql = "SELECT * FROM log";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    echo '<table id="customers"><tr><th>Time</th><th>User</th><th>Card Number</th><th>Ammount</th></tr>';
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "<tr><td>".$row["time"]."</td><td>".$row["user"]."</td><td>".$row["card"]."</td><td>".$row["ammount"]."</td></tr>";
+    }
+    echo "</table>";
+} else {
+    echo "0 results";
+}
+$conn->close();
+?>
+
+</div>
+
+  <!-- Footer -->
   <footer class="w3-container w3-padding-16 w3-light-grey">
     <h4>Managed By</h4>
     <p><a href="mailto:premudeshi99@gmail.com">Vital Water</a></p>
   </footer>
+
+  <!-- End page content -->
+</div>
+
 <script>
 // Get the Sidebar
 var mySidebar = document.getElementById("mySidebar");

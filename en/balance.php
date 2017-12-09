@@ -1,6 +1,6 @@
-<?php require "login/loginheader.php"; 
+<?php require "../login/loginheader.php"; 
 $user = $_SESSION['username'];
-require "vendor/autoload.php"; 
+require "../vendor/autoload.php"; 
 ?>
 
 <!DOCTYPE html>
@@ -8,34 +8,11 @@ require "vendor/autoload.php";
 <title>Vital Water Gateway</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/w3.css">
-<link rel="stylesheet" href="css/google.css">
-<link rel="stylesheet" href="css/font-awesome.css">
+<link rel="stylesheet" href="../css/w3.css">
+<link rel="stylesheet" href="../css/google.css">
+<link rel="stylesheet" href="../css/font-awesome.css">
 <style>
-@font-face {
-font-family: FontAwsome;
-src: url(/fonts/FontAwesome.otf);
-}
-
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-
-#button {
-    font-family: FontAwesome;
-}
-
-
-input[type=submit] {
-    background: transparent url("path/to/image.jpg") 0 0 no-repeat;
-    font-weight: bold;
-    display: inline-block;
-    text-align: center;
-    cursor: pointer;
-    height: 331px; /* height of the background image */
-    width: 500px; /* width of the background image */
-    border: 5px solid #fff;
-    border-radius: 4em;
-}
-
 </style>
 <body class="w3-light-grey">
 <head>
@@ -67,8 +44,8 @@ input[type=submit] {
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
     <a href="index.php" class="w3-bar-item w3-button w3-padding "><i class="fa fa-users fa-fw"></i>  Overview</a>
-    <a href="purchase.php" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-money fa-fw"></i>  Purchase</a>
-    <a href="balance.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-newspaper-o fa-fw"></i>  Balance</a>
+    <a href="purchase.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-money fa-fw"></i>  Purchase</a>
+    <a href="balance.php" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-newspaper-o fa-fw"></i>  Balance</a>
     <a href="statement.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-line-chart fa-fw"></i>  Statement</a>
     <a href="news.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  News</a>
   </div>
@@ -77,24 +54,34 @@ input[type=submit] {
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
-
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
 
   <!-- Header -->
-  <form action="confirmed.php" method="post">
   <header class="w3-container" style="padding-top:22px">
-       <h5><b><span class="fa fa-money "></span> Confirm Purchase</b></h5>
+    <h5><b><i class="fa fa-balance-scale"></i> Balance</b></h5>
   </header>
 
-  <div class="w3-row-padding w3-margin-bottom">
- 
+
+  <div class="w3-container">
+    <h5>Card Balances</h5>
+      <form action="balance.php" method="post">
+        <ul class="w3-ul w3-card-4 w3-white">
+        <li class="w3-padding-16">
+            <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
+            <span class="w3-xlarge">Card Number: <input type="password" name="number"><input type="submit" value="Search"></span><br>
+        </li>
+      </ul>
+    </form>
+  <br>
 <?php
-$water = "";
-$package = "";
+require "dbconf.php"; 
+$card = "";
+$balance = "Scan";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $water = test_input($_POST["card"]);
-  $package = test_input($_POST["export"]);
+  $card = test_input($_POST["number"]);
+
 }
 
 function test_input($data) {
@@ -104,8 +91,6 @@ function test_input($data) {
   return $data;
 }
 
-require "dbconf.php"; 
-
 
 $dbhandle = mysql_connect($servername, $username, $password) 
   or die("Unable to connect to MySQL");
@@ -114,7 +99,7 @@ echo "Connected to MySQL<br>";
 $selected = mysql_select_db( $dbname , $dbhandle) 
   or die("Could not select examples");
 
-$result = mysql_query("SELECT balance FROM card WHERE cardnumber = '$water'");
+$result = mysql_query("SELECT balance FROM card WHERE cardnumber = '$card'");
 if (!$result) {
     echo 'Could not run query: ' . mysql_error();
     exit;
@@ -122,10 +107,8 @@ if (!$result) {
 $row = mysql_fetch_row($result);
 
 $balance = $row[0]; // 42
-$text = "card=" . $water . "&package=" . $package  ;
-$encrypt = substr($water, 0, 3) . "**" .substr($water, 6, 8) ;
+$encrypt = substr($card, 0, 3) . "**" .substr($card, 6, 8) ;
 ?>
-
 
         <ul class="w3-ul w3-card-4 w3-white">
         <li class="w3-padding-16">
@@ -134,35 +117,25 @@ $encrypt = substr($water, 0, 3) . "**" .substr($water, 6, 8) ;
         </li>
               <li class="w3-padding-16">
             <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-            <span class="w3-large">Balance: <?php echo $balance ?> TSH</span><br>
+            <span class="w3-large">Balance: <?php echo $balance ?></span><br>
         </li>
-      <li class="w3-padding-16">
-            <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-            <span class="w3-large">Selected Package: <?php echo $package ?> TSH</span><br>
-        </li>
-              <li class="w3-padding-16">
-            <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-            <span class="w3-large">Balance After Payment: <?php echo $balance - $package ; ?> TSH</span><br>
-        </li>
-                </li>
-              <li class="w3-padding-16">
-            <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-            <span class="w3-large">
-<?php if ($package > $balance) { ?>
-<button disabled type="submit" value="<?php echo $water ?>"name="export" class="w3-button w3-dark-grey">Insufficient Balance  <i class="fa fa-close"></i></button>
-<?php } else { ?>
-<button name="string" type="submit" value="<?php echo $text ?>" class="w3-button w3-dark-grey">Pay  <i class="fa fa-check"></i></button>
-<?php } ?></span><br>
-        </li>
+
       </ul>
 
 
   </div>
+  <hr>
+
+  
+
+  <!-- Footer -->
+  <footer class="w3-container w3-padding-16 w3-light-grey">
+    <h4>Managed By</h4>
+    <p><a href="mailto:premudeshi99@gmail.com">Vital Water</a></p>
+  </footer>
 
 
-</form>
-
-</div>
+  <!-- End page content -->
 </div>
 
 <script>
@@ -189,11 +162,6 @@ function w3_close() {
     overlayBg.style.display = "none";
 }
 </script>
-  <footer class="w3-container w3-padding-16 w3-light-grey">
-    <h4>Managed By</h4>
-    <p><a href="mailto:premudeshi99@gmail.com">Vital Water</a></p>
-  </footer>
+
 </body>
 </html>
-
-
