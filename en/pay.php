@@ -104,7 +104,7 @@ function test_input($data) {
   return $data;
 }
 
-require "dbconf.php"; 
+require "../dbconf.php"; 
 
 
 $dbhandle = mysql_connect($servername, $username, $password) 
