@@ -103,7 +103,7 @@ function test_input($data) {
 parse_str($string);
 
 
-require "dbconf.php"; 
+require "../dbconf.php"; 
 
 $dbhandle = mysql_connect($servername, $username, $password) 
   or die("Unable to connect to MySQL");
