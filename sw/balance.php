@@ -13,31 +13,6 @@ require "../vendor/autoload.php";
 <link rel="stylesheet" href="../css/font-awesome.css">
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-
-<style>
-#customers {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-#customers td, #customers th {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-#customers tr:nth-child(even){background-color: #f2f2f2;}
-
-#customers tr:hover {background-color: #ddd;}
-
-#customers th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #4CAF50;
-    color: white;
-}
-</style>
 </style>
 <body class="w3-light-grey">
 <head>
@@ -70,8 +45,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
     <a href="index.php" class="w3-bar-item w3-button w3-padding "><i class="fa fa-users fa-fw"></i>  Overview</a>
     <a href="purchase.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-money fa-fw"></i>  Purchase</a>
-    <a href="balance.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-newspaper-o fa-fw"></i>  Balance</a>
-    <a href="statement.php" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-line-chart fa-fw"></i>  Statement</a>
+    <a href="balance.php" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-newspaper-o fa-fw"></i>  Balance</a>
+    <a href="statement.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-line-chart fa-fw"></i>  Statement</a>
     <a href="news.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  News</a>
   </div>
 </nav>
@@ -84,64 +59,81 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
   <!-- Header -->
   <header class="w3-container" style="padding-top:22px">
-    <h5><b><i class="fa fa-bar-chart"></i> Statement</b></h5>
+    <h5><b><i class="fa fa-balance-scale"></i> Balance</b></h5>
   </header>
 
+
   <div class="w3-container">
-    <h5>Download Reports</h5>
-    <ul class="w3-ul w3-card-4 w3-white">
-      <li class="w3-padding-16">
-        <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-        <span class="w3-xlarge">Purchase Log</span><br>
-        <span class="w3-large">Ecxel File Format</span><br>
-        <form method="post" action="report/pl.php"><button type="submit" name="export" class="w3-button w3-dark-grey">Download  <i class="fa fa-download"></i></button></form>
-      </li>
-          <li class="w3-padding-16">
-        <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-        <form method="post" action="report/plc.php">
-        <span class="w3-xlarge">Purchase Log Based on Card</span><br>
-        <span class="w3-large">Card Number: <input type="password" name="number"></span><br>
-        <span class="w3-large">Ecxel File Format</span><br>
-        <button type="submit" name="export" class="w3-button w3-dark-grey">Download  <i class="fa fa-download"></i></button></form>
-      </li>
-
-    </ul>
-  </div>
-  <hr>
-<div class="w3-container">
+    <h5>Card Balances</h5>
+      <form action="balance.php" method="post">
+        <ul class="w3-ul w3-card-4 w3-white">
+        <li class="w3-padding-16">
+            <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
+            <span class="w3-xlarge">Card Number: <input type="password" name="number"><input type="submit" value="Search"></span><br>
+        </li>
+      </ul>
+    </form>
+  <br>
 <?php
-require "../dbconf.php"; 
+require "dbconf.php"; 
+$card = "";
+$balance = "Scan";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $card = test_input($_POST["number"]);
 
-$sql = "SELECT * FROM log";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    echo '<table id="customers"><tr><th>Time</th><th>User</th><th>Card Number</th><th>Ammount</th></tr>';
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-        echo "<tr><td>".$row["time"]."</td><td>".$row["user"]."</td><td>".$row["card"]."</td><td>".$row["ammount"]."</td></tr>";
-    }
-    echo "</table>";
-} else {
-    echo "0 results";
 }
-$conn->close();
+
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
+
+$dbhandle = mysql_connect($servername, $username, $password) 
+  or die("Unable to connect to MySQL");
+echo "Connected to MySQL<br>";
+
+$selected = mysql_select_db( $dbname , $dbhandle) 
+  or die("Could not select examples");
+
+$result = mysql_query("SELECT balance FROM card WHERE cardnumber = '$card'");
+if (!$result) {
+    echo 'Could not run query: ' . mysql_error();
+    exit;
+}
+$row = mysql_fetch_row($result);
+
+$balance = $row[0]; // 42
+$encrypt = substr($card, 0, 3) . "**" .substr($card, 6, 8) ;
 ?>
 
-</div>
+        <ul class="w3-ul w3-card-4 w3-white">
+        <li class="w3-padding-16">
+            <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
+            <span class="w3-large">Card Number: <?php echo $encrypt ?></span><br>
+        </li>
+              <li class="w3-padding-16">
+            <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
+            <span class="w3-large">Balance: <?php echo $balance ?></span><br>
+        </li>
+
+      </ul>
+
+
+  </div>
+  <hr>
+
+  
 
   <!-- Footer -->
   <footer class="w3-container w3-padding-16 w3-light-grey">
     <h4>Managed By</h4>
     <p><a href="mailto:premudeshi99@gmail.com">Vital Water</a></p>
   </footer>
+
 
   <!-- End page content -->
 </div>

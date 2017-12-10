@@ -13,31 +13,6 @@ require "../vendor/autoload.php";
 <link rel="stylesheet" href="../css/font-awesome.css">
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-
-<style>
-#customers {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-#customers td, #customers th {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-#customers tr:nth-child(even){background-color: #f2f2f2;}
-
-#customers tr:hover {background-color: #ddd;}
-
-#customers th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #4CAF50;
-    color: white;
-}
-</style>
 </style>
 <body class="w3-light-grey">
 <head>
@@ -68,10 +43,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   </div>
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-    <a href="index.php" class="w3-bar-item w3-button w3-padding "><i class="fa fa-users fa-fw"></i>  Overview</a>
+    <a href="index.php" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i>  Overview</a>
     <a href="purchase.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-money fa-fw"></i>  Purchase</a>
     <a href="balance.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-newspaper-o fa-fw"></i>  Balance</a>
-    <a href="statement.php" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-line-chart fa-fw"></i>  Statement</a>
+    <a href="statement.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-line-chart fa-fw"></i>  Statement</a>
+    <a href="orders.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-address-book fa-fw"></i>  Orders</a>
     <a href="news.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  News</a>
   </div>
 </nav>
@@ -84,63 +60,80 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
   <!-- Header -->
   <header class="w3-container" style="padding-top:22px">
-    <h5><b><i class="fa fa-bar-chart"></i> Statement</b></h5>
+    <h5><b><i class="fa fa-bug"></i> Error Reporting</b></h5>
   </header>
+<?php
 
-  <div class="w3-container">
-    <h5>Download Reports</h5>
-    <ul class="w3-ul w3-card-4 w3-white">
-      <li class="w3-padding-16">
-        <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-        <span class="w3-xlarge">Purchase Log</span><br>
-        <span class="w3-large">Ecxel File Format</span><br>
-        <form method="post" action="report/pl.php"><button type="submit" name="export" class="w3-button w3-dark-grey">Download  <i class="fa fa-download"></i></button></form>
-      </li>
-          <li class="w3-padding-16">
-        <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-        <form method="post" action="report/plc.php">
-        <span class="w3-xlarge">Purchase Log Based on Card</span><br>
-        <span class="w3-large">Card Number: <input type="password" name="number"></span><br>
-        <span class="w3-large">Ecxel File Format</span><br>
-        <button type="submit" name="export" class="w3-button w3-dark-grey">Download  <i class="fa fa-download"></i></button></form>
-      </li>
+require "vendor/autoload.php"; 
+    use Dubture\Monolog\Reader\LogReader;
 
-    </ul>
+    $logFile = 'log/master.log';
+    $reader = new LogReader($logFile);
+
+    $pattern = '/\[(?P<date>.*)\] (?P<logger>[\w-\s]+).(?P<level>\w+): (?P<message>[^\[\{]+) (?P<context>[\[\{].*[\]\}]) (?P<extra>[\[\{].*[\]\}])/';
+    $reader->getParser()->registerPattern('newPatternName', $pattern);
+    $reader->setPattern('newPatternName');
+
+    foreach ($reader as $log) {
+        echo sprintf("The log entry was written at %s. \n", $log['date']->format('Y-m-d h:i:s'));
+    }
+
+    $lastLine = $reader[count($reader)-1];
+    echo sprintf("The last log entry was written at %s. \n", $lastLine['date']->format('Y-m-d h:i:s'));
+
+
+?>
+  <div class="w3-panel">
+    <div class="w3-row-padding" style="margin:0 -16px">
+
+      <div class="w3-container">
+        <h5>Log</h5>
+        <table class="w3-table w3-striped w3-white">
+          <tr>
+            <td><i class="fa fa-user w3-text-blue w3-large"></i></td>
+            <td>New record, over 90 views.</td>
+            <td><i>10 mins</i></td>
+          </tr>
+          <tr>
+            <td><i class="fa fa-bell w3-text-red w3-large"></i></td>
+            <td>Database error.</td>
+            <td><i>15 mins</i></td>
+          </tr>
+          <tr>
+            <td><i class="fa fa-users w3-text-yellow w3-large"></i></td>
+            <td>New record, over 40 users.</td>
+            <td><i>17 mins</i></td>
+          </tr>
+          <tr>
+            <td><i class="fa fa-comment w3-text-red w3-large"></i></td>
+            <td>New comments.</td>
+            <td><i>25 mins</i></td>
+          </tr>
+          <tr>
+            <td><i class="fa fa-bookmark w3-text-blue w3-large"></i></td>
+            <td>Check transactions.</td>
+            <td><i>28 mins</i></td>
+          </tr>
+          <tr>
+            <td><i class="fa fa-laptop w3-text-red w3-large"></i></td>
+            <td>CPU overload.</td>
+            <td><i>35 mins</i></td>
+          </tr>
+          <tr>
+            <td><i class="fa fa-share-alt w3-text-green w3-large"></i></td>
+            <td>New shares.</td>
+            <td><i>39 mins</i></td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </div>
   <hr>
-<div class="w3-container">
-<?php
-require "../dbconf.php"; 
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-
-$sql = "SELECT * FROM log";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    echo '<table id="customers"><tr><th>Time</th><th>User</th><th>Card Number</th><th>Ammount</th></tr>';
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-        echo "<tr><td>".$row["time"]."</td><td>".$row["user"]."</td><td>".$row["card"]."</td><td>".$row["ammount"]."</td></tr>";
-    }
-    echo "</table>";
-} else {
-    echo "0 results";
-}
-$conn->close();
-?>
-
-</div>
-
+  
   <!-- Footer -->
   <footer class="w3-container w3-padding-16 w3-light-grey">
-    <h4>Managed By</h4>
-    <p><a href="mailto:premudeshi99@gmail.com">Vital Water</a></p>
+    <h4>FOOTER</h4>
+    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
   </footer>
 
   <!-- End page content -->

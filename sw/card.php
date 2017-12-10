@@ -12,32 +12,30 @@ require "../vendor/autoload.php";
 <link rel="stylesheet" href="../css/google.css">
 <link rel="stylesheet" href="../css/font-awesome.css">
 <style>
+@font-face {
+font-family: FontAwsome;
+src: url(/fonts/FontAwesome.otf);
+}
+
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
-<style>
-#customers {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
+#button {
+    font-family: FontAwesome;
 }
 
-#customers td, #customers th {
-    border: 1px solid #ddd;
-    padding: 8px;
+
+input[type=submit] {
+    background: transparent url("path/to/image.jpg") 0 0 no-repeat;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    height: 331px; /* height of the background image */
+    width: 500px; /* width of the background image */
+    border: 5px solid #fff;
+    border-radius: 4em;
 }
 
-#customers tr:nth-child(even){background-color: #f2f2f2;}
-
-#customers tr:hover {background-color: #ddd;}
-
-#customers th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #4CAF50;
-    color: white;
-}
-</style>
 </style>
 <body class="w3-light-grey">
 <head>
@@ -69,9 +67,9 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
     <a href="index.php" class="w3-bar-item w3-button w3-padding "><i class="fa fa-users fa-fw"></i>  Overview</a>
-    <a href="purchase.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-money fa-fw"></i>  Purchase</a>
+    <a href="purchase.php" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-money fa-fw"></i>  Purchase</a>
     <a href="balance.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-newspaper-o fa-fw"></i>  Balance</a>
-    <a href="statement.php" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-line-chart fa-fw"></i>  Statement</a>
+    <a href="statement.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-line-chart fa-fw"></i>  Statement</a>
     <a href="news.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  News</a>
   </div>
 </nav>
@@ -79,71 +77,51 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
+
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
 
   <!-- Header -->
+  <form action="pay.php" method="post">
   <header class="w3-container" style="padding-top:22px">
-    <h5><b><i class="fa fa-bar-chart"></i> Statement</b></h5>
+       <h5><b><span class="fa fa-drivers-license-o "></span> Please Scan the wCard</b></h5>
   </header>
 
+  <div class="w3-row-padding w3-margin-bottom">
+ 
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $water = test_input($_POST["choose"]);
+}
+
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
+echo $water;
+
+
+?>
   <div class="w3-container">
-    <h5>Download Reports</h5>
     <ul class="w3-ul w3-card-4 w3-white">
       <li class="w3-padding-16">
         <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-        <span class="w3-xlarge">Purchase Log</span><br>
-        <span class="w3-large">Ecxel File Format</span><br>
-        <form method="post" action="report/pl.php"><button type="submit" name="export" class="w3-button w3-dark-grey">Download  <i class="fa fa-download"></i></button></form>
-      </li>
-          <li class="w3-padding-16">
-        <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-        <form method="post" action="report/plc.php">
-        <span class="w3-xlarge">Purchase Log Based on Card</span><br>
-        <span class="w3-large">Card Number: <input type="password" name="number"></span><br>
-        <span class="w3-large">Ecxel File Format</span><br>
-        <button type="submit" name="export" class="w3-button w3-dark-grey">Download  <i class="fa fa-download"></i></button></form>
+        <span class="w3-xlarge"><div class="w3-row-padding w3-margin-bottom">
+    Card: <input type="password" name="card">
+    <!-- <input type="checkbox" name="cost" value=<?php echo $water; ?> -->
+<button type="submit" value="<?php echo $water ?>"name="export" class="w3-button w3-dark-grey">Pay  <i class="fa fa-money"></i></button></span><br>
       </li>
 
     </ul>
   </div>
-  <hr>
-<div class="w3-container">
-<?php
-require "../dbconf.php"; 
+    
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-
-$sql = "SELECT * FROM log";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    echo '<table id="customers"><tr><th>Time</th><th>User</th><th>Card Number</th><th>Ammount</th></tr>';
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-        echo "<tr><td>".$row["time"]."</td><td>".$row["user"]."</td><td>".$row["card"]."</td><td>".$row["ammount"]."</td></tr>";
-    }
-    echo "</table>";
-} else {
-    echo "0 results";
-}
-$conn->close();
-?>
+</form>
 
 </div>
-
-  <!-- Footer -->
-  <footer class="w3-container w3-padding-16 w3-light-grey">
-    <h4>Managed By</h4>
-    <p><a href="mailto:premudeshi99@gmail.com">Vital Water</a></p>
-  </footer>
-
-  <!-- End page content -->
 </div>
 
 <script>
@@ -170,6 +148,9 @@ function w3_close() {
     overlayBg.style.display = "none";
 }
 </script>
-
+  <footer class="w3-container w3-padding-16 w3-light-grey">
+    <h4>Managed By</h4>
+    <p><a href="mailto:premudeshi99@gmail.com">Vital Water</a></p>
+  </footer>
 </body>
 </html>

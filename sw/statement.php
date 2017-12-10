@@ -84,24 +84,24 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
   <!-- Header -->
   <header class="w3-container" style="padding-top:22px">
-    <h5><b><i class="fa fa-bar-chart"></i> Statement</b></h5>
+    <h5><b><i class="fa fa-bar-chart"></i> Kauli</b></h5>
   </header>
 
   <div class="w3-container">
-    <h5>Download Reports</h5>
+    <h5>Pakua Ripoti</h5>
     <ul class="w3-ul w3-card-4 w3-white">
       <li class="w3-padding-16">
         <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-        <span class="w3-xlarge">Purchase Log</span><br>
-        <span class="w3-large">Ecxel File Format</span><br>
+        <span class="w3-xlarge">Ingia ya Ununuzi</span><br>
+        <span class="w3-large">Faili ya Excel</span><br>
         <form method="post" action="report/pl.php"><button type="submit" name="export" class="w3-button w3-dark-grey">Download  <i class="fa fa-download"></i></button></form>
       </li>
           <li class="w3-padding-16">
         <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
         <form method="post" action="report/plc.php">
-        <span class="w3-xlarge">Purchase Log Based on Card</span><br>
-        <span class="w3-large">Card Number: <input type="password" name="number"></span><br>
-        <span class="w3-large">Ecxel File Format</span><br>
+        <span class="w3-xlarge">Kitengo cha Ununuzi Kulingana na Kadi</span><br>
+        <span class="w3-large">Namba ya kadi: <input type="password" name="number"></span><br>
+        <span class="w3-large">Faili ya Excel</span><br>
         <button type="submit" name="export" class="w3-button w3-dark-grey">Download  <i class="fa fa-download"></i></button></form>
       </li>
 
