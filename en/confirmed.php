@@ -184,7 +184,6 @@ switch ($package) {
     default:
         echo "An Error occured: Select package";
 }
-
 }
 
 ?>
