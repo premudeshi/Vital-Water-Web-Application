@@ -66,7 +66,7 @@ input[type=submit] {
   </div>
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-    <a href="index.php" class="w3-bar-item w3-button w3-padding "><i class="fa fa-users fa-fw"></i>  Overview</a>
+    <a href="../index.php" class="w3-bar-item w3-button w3-padding "><i class="fa fa-users fa-fw"></i>  Overview</a>
     <a href="purchase.php" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-money fa-fw"></i>  Purchase</a>
     <a href="balance.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-newspaper-o fa-fw"></i>  Balance</a>
     <a href="statement.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-line-chart fa-fw"></i>  Statement</a>
@@ -84,7 +84,7 @@ input[type=submit] {
   <!-- Header -->
   <form action="confirmed.php" method="post">
   <header class="w3-container" style="padding-top:22px">
-       <h5><b><span class="fa fa-money "></span> Confirm Purchase</b></h5>
+       <h5><b><span class="fa fa-money "></span> Thibitisha Ununuzi</b></h5>
   </header>
 
   <div class="w3-row-padding w3-margin-bottom">
@@ -129,29 +129,24 @@ $encrypt = substr($water, 0, 3) . "**" .substr($water, 6, 8) ;
 
         <ul class="w3-ul w3-card-4 w3-white">
         <li class="w3-padding-16">
-            <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
             <span class="w3-large">Card Number: <?php echo $encrypt ?></span><br>
         </li>
               <li class="w3-padding-16">
-            <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
             <span class="w3-large">Balance: <?php echo $balance ?> TSH</span><br>
         </li>
       <li class="w3-padding-16">
-            <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
             <span class="w3-large">Selected Package: <?php echo $package ?> TSH</span><br>
         </li>
               <li class="w3-padding-16">
-            <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
             <span class="w3-large">Balance After Payment: <?php echo $balance - $package ; ?> TSH</span><br>
         </li>
                 </li>
               <li class="w3-padding-16">
-            <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
             <span class="w3-large">
 <?php if ($package > $balance) { ?>
-<button disabled type="submit" value="<?php echo $water ?>"name="export" class="w3-button w3-dark-grey">Insufficient Balance  <i class="fa fa-close"></i></button>
+<button disabled type="submit" value="<?php echo $water ?>"name="export" class="w3-button w3-dark-grey">Fedha haitoshi  <i class="fa fa-close"></i></button>
 <?php } else { ?>
-<button name="string" type="submit" value="<?php echo $text ?>" class="w3-button w3-dark-grey">Pay  <i class="fa fa-check"></i></button>
+<button name="string" type="submit" value="<?php echo $text ?>" class="w3-button w3-dark-grey">Kulipa  <i class="fa fa-check"></i></button>
 <?php } ?></span><br>
         </li>
       </ul>

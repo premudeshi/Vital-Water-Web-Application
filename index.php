@@ -2,7 +2,7 @@
 $user = $_SESSION['username'];
 require "vendor/autoload.php"; 
 
-
+echo exec('sudo chmod 666 /dev/Vital-Water-Master');
 require "dbconf.php"; 
 $link = mysql_connect($servername, $username, $password);
 mysql_select_db($dbname, $link);
@@ -88,7 +88,51 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         </div>
         <div class="w3-clear"></div>
         <h4>Total Orders</h4>
-      </div>
+      
+    <style type="text/css">
+.button1 {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: blue;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 15px;
+  padding: 10px;
+  width: 150px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button1 span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button1 span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button1:hover span {
+  padding-right: 25px;
+}
+
+.button1:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+    </style>
+<a href="en/purchase.php"><button class="button1" style="vertical-align:middle"><span>New </span></button></a>
+    </div>
     </div>
     <div class="w3-quarter">
       <div class="w3-container w3-blue w3-padding-16">

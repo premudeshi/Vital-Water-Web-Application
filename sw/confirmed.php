@@ -36,6 +36,46 @@ input[type=submit] {
     border-radius: 4em;
 }
 
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
 </style>
 <body class="w3-light-grey">
 <head>
@@ -66,7 +106,7 @@ input[type=submit] {
   </div>
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-    <a href="index.php" class="w3-bar-item w3-button w3-padding "><i class="fa fa-users fa-fw"></i>  Overview</a>
+    <a href="../index.php" class="w3-bar-item w3-button w3-padding "><i class="fa fa-users fa-fw"></i>  Overview</a>
     <a href="purchase.php" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-money fa-fw"></i>  Purchase</a>
     <a href="balance.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-newspaper-o fa-fw"></i>  Balance</a>
     <a href="statement.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-line-chart fa-fw"></i>  Statement</a>
@@ -143,7 +183,11 @@ if (!$result1) {
                  <li class="w3-padding-16">
             <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
             <span class="w3-large">Current Balance: <?php echo $update ?></span><br>
-        </li>    
+        </li> 
+                         <li class="w3-padding-16">
+            <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
+            <span class="w3-large"><button class="button" style="vertical-align:middle"><span>Buy Water </span></button></span><br>
+        </li>     
       </ul>
 
 

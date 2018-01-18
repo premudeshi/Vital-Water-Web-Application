@@ -66,7 +66,7 @@ input[type=submit] {
   </div>
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-    <a href="index.php" class="w3-bar-item w3-button w3-padding "><i class="fa fa-users fa-fw"></i>  Overview</a>
+    <a href="../index.php" class="w3-bar-item w3-button w3-padding "><i class="fa fa-users fa-fw"></i>  Overview</a>
     <a href="purchase.php" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-money fa-fw"></i>  Purchase</a>
     <a href="balance.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-newspaper-o fa-fw"></i>  Balance</a>
     <a href="statement.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-line-chart fa-fw"></i>  Statement</a>
@@ -84,7 +84,7 @@ input[type=submit] {
   <!-- Header -->
   <form action="pay.php" method="post">
   <header class="w3-container" style="padding-top:22px">
-       <h5><b><span class="fa fa-drivers-license-o "></span> Please Scan the wCard</b></h5>
+       <h5><b><span class="fa fa-drivers-license-o "></span> Tafadhali soma wCard</b></h5>
   </header>
 
   <div class="w3-row-padding w3-margin-bottom">
@@ -108,11 +108,10 @@ echo $water;
   <div class="w3-container">
     <ul class="w3-ul w3-card-4 w3-white">
       <li class="w3-padding-16">
-        <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
         <span class="w3-xlarge"><div class="w3-row-padding w3-margin-bottom">
     Card: <input type="password" name="card">
     <!-- <input type="checkbox" name="cost" value=<?php echo $water; ?> -->
-<button type="submit" value="<?php echo $water ?>"name="export" class="w3-button w3-dark-grey">Pay  <i class="fa fa-money"></i></button></span><br>
+<button type="submit" value="<?php echo $water ?>"name="export" class="w3-button w3-dark-grey">Kulipa  <i class="fa fa-money"></i></button></span><br>
       </li>
 
     </ul>
