@@ -169,16 +169,16 @@ echo '<i class="fa fa-refresh fa-spin fa-5x fa-fw"></i>';
 
 
 switch ($package) {
-    case "250":
+    case "99":
         echo exec('python 250.py');
         break;
-    case "500":
+    case "100":
         echo exec('python 500.py');
         break;
-    case "750":
+    case "150":
         echo exec('python 750.py');
         break;
-    case "1000":
+    case "200":
         echo exec('python 1000.py');
         break;
     default:
