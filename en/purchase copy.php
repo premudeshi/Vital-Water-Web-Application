@@ -1,6 +1,9 @@
 <?php $user = "Vital Water User";
 
-require "../vendor/autoload.php"; 
+require "../vendor/autoload.php";
+
+
+ 
 ?>
 
 <!DOCTYPE html>
@@ -34,8 +37,30 @@ input[type=submit] {
     width: 500px; /* width of the background image */
     border: 5px solid #fff;
     border-radius: 4em;
+        -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
 }
 
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 3px 6px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.button2 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #008CBA;
+}
+.button2:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
 </style>
 <body class="w3-light-grey">
 <head>
@@ -82,84 +107,88 @@ input[type=submit] {
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
 
   <!-- Header -->
-  <form action="confirmed.php" method="post">
+  <form action="card.php" method="post">
   <header class="w3-container" style="padding-top:22px">
-       <h5><b><span class="fa fa-money "></span> Thibitisha Ununuzi</b></h5>
+    <h5><b><span class="fa fa-money"></span> Purchase</b></h5>
   </header>
 
   <div class="w3-row-padding w3-margin-bottom">
- 
-<?php
-$water = "";
-$package = "";
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $water = test_input($_POST["card"]);
-  $package = test_input($_POST["export"]);
-}
+        <button name="choose" value="250" type="submit" class="button button2">
+      <div class="w3-container w3-light-blue w3-padding-16">
+        <div class="w3-left"><i class="fa fa-tint w3-xxxlarge"></i></div>
+        <div class="w3-right">
+          <h3>250 mL</h3>
+        </div>
+        <div class="w3-clear"></div>
+        <h4>Drinking Water</h4>
+        <h2>Tsh 250</h2>
 
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
+                    <i class="fa fa-glass"></i> Drink Now
+           
+    </div>
+     </button>
+            <button name="choose" value="500" type="submit" class="button button2">
+      <div class="w3-container w3-cyan w3-padding-16">
+        <div class="w3-left"><i class="fa fa-tint w3-xxxlarge"></i></div>
+        <div class="w3-right">
+          <h3>500 mL</h3>
+        </div>
+        <div class="w3-clear"></div>
+        <h4>Drinking Water</h4>
+        <h2>Tsh 500</h2>
 
-require "../dbconf.php"; 
+                    <i class="fa fa-glass"></i> Drink Now
+                
+      </div>
+</button>
+        <button name="choose" value="750" type="submit" class="button button2">      
+          <div class="w3-container w3-blue w3-padding-16">
+        <div class="w3-left"><i class="fa fa-tint w3-xxxlarge"></i></div>
+        <div class="w3-right">
+          <h3>750 mL</h3>
+        </div>
+        <div class="w3-clear"></div>
+        <h4>Drinking Water</h4>
+        <h2>Tsh 750</h2>
 
-
-$dbhandle = mysql_connect($servername, $username, $password) 
-  or die("Unable to connect to MySQL");
-echo "Connected to MySQL<br>";
-
-$selected = mysql_select_db( $dbname , $dbhandle) 
-  or die("Could not select examples");
-
-$result = mysql_query("SELECT balance FROM card WHERE cardnumber = '$water'");
-if (!$result) {
-    echo 'Could not run query: ' . mysql_error();
-    exit;
-}
-$row = mysql_fetch_row($result);
-
-$balance = $row[0]; // 42
-$text = "card=" . $water . "&package=" . $package  ;
-$encrypt = substr($water, 0, 3) . "**" .substr($water, 6, 8) ;
-?>
-
-
-        <ul class="w3-ul w3-card-4 w3-white">
-        <li class="w3-padding-16">
-            <span class="w3-large">Card Number: <?php echo $encrypt ?></span><br>
-        </li>
-              <li class="w3-padding-16">
-            <span class="w3-large">Balance: <?php echo $balance ?> TSH</span><br>
-        </li>
-      <li class="w3-padding-16">
-            <span class="w3-large">Selected Package: <?php echo $package ?> TSH</span><br>
-        </li>
-              <li class="w3-padding-16">
-            <span class="w3-large">Balance After Payment: <?php echo $balance - $package ; ?> TSH</span><br>
-        </li>
-                </li>
-              <li class="w3-padding-16">
-            <span class="w3-large">
-<?php if ($package > $balance) { ?>
-<button disabled type="submit" value="<?php echo $water ?>"name="export" class="w3-button w3-dark-grey">Fedha haitoshi  <i class="fa fa-close"></i></button>
-<?php } else { ?>
-<button name="string" type="submit" value="<?php echo $text ?>" class="w3-button w3-dark-grey">Kulipa  <i class="fa fa-check"></i></button>
-<?php } ?></span><br>
-        </li>
-      </ul>
-
-
+                    <i class="fa fa-glass"></i> Drink Now
+                
+      </div>
+</button>
+<button name="choose" value="1000" type="submit" class="button button2">
+      <div class="w3-container w3-indigo w3-text-white w3-padding-16">
+        <div class="w3-left"><i class="fa fa-tint w3-xxxlarge"></i></div>
+        <div class="w3-right">
+          <h3>1 Litre</h3>
+        </div>
+        <div class="w3-clear"></div>
+        <h4>Drinking Water</h4>
+        <h2>Tsh 100</h2>
+        <i class="fa fa-glass"></i> Drink Now
+      </div>
   </div>
+                  </button>
+                </form>
+<style>
+.button1 {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
 
-
-</form>
-
-</div>
-</div>
-
+.button3 {padding: 32px 40px;}
+</style>
+                <a href="../sw/purchase.php"><button class="button1 button3">Swahili</button></a>
+  <footer class="w3-container w3-padding-16 w3-light-grey">
+    <h4>Managed By</h4>
+    <p><a href="mailto:premudeshi99@gmail.com">Vital Water</a></p>
+  </footer>
 <script>
 // Get the Sidebar
 var mySidebar = document.getElementById("mySidebar");
@@ -184,11 +213,6 @@ function w3_close() {
     overlayBg.style.display = "none";
 }
 </script>
-  <footer class="w3-container w3-padding-16 w3-light-grey">
-    <h4>Managed By</h4>
-    <p><a href="mailto:premudeshi99@gmail.com">Vital Water</a></p>
-  </footer>
+
 </body>
 </html>
-
-

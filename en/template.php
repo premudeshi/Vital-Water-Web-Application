@@ -1,5 +1,5 @@
-<?php require "login/loginheader.php"; 
-$user = $_SESSION['username'];
+<?php $user = "Vital Water User";
+
 require "vendor/autoload.php"; 
 ?>
 

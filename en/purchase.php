@@ -1,5 +1,5 @@
-<?php require "../login/loginheader.php"; 
-$user = $_SESSION['username'];
+<?php $user = "Vital Water User";
+
 require "../vendor/autoload.php";
 
 
@@ -113,57 +113,57 @@ input[type=submit] {
   </header>
 
   <div class="w3-row-padding w3-margin-bottom">
-        <button name="choose" value="250" type="submit" class="button button2">
+        <button name="choose" value="100" type="submit" class="button button2">
       <div class="w3-container w3-light-blue w3-padding-16">
-        <div class="w3-left"><i class="fa fa-tint w3-xxxlarge"></i></div>
-        <div class="w3-right">
-          <h3>250 mL</h3>
-        </div>
-        <div class="w3-clear"></div>
-        <h4>Drinking Water</h4>
-        <h2>Tsh 250</h2>
-
-                    <i class="fa fa-glass"></i> Drink Now
-           
-    </div>
-     </button>
-            <button name="choose" value="500" type="submit" class="button button2">
-      <div class="w3-container w3-cyan w3-padding-16">
         <div class="w3-left"><i class="fa fa-tint w3-xxxlarge"></i></div>
         <div class="w3-right">
           <h3>500 mL</h3>
         </div>
         <div class="w3-clear"></div>
         <h4>Drinking Water</h4>
-        <h2>Tsh 500</h2>
+        <h2>Tsh 100</h2>
+
+                    <i class="fa fa-glass"></i> Drink Now
+           
+    </div>
+     </button>
+            <button name="choose" value="100" type="submit" class="button button2">
+      <div class="w3-container w3-cyan w3-padding-16">
+        <div class="w3-left"><i class="fa fa-tint w3-xxxlarge"></i></div>
+        <div class="w3-right">
+          <h3>1 L</h3>
+        </div>
+        <div class="w3-clear"></div>
+        <h4>Drinking Water</h4>
+        <h2>Tsh 100</h2>
 
                     <i class="fa fa-glass"></i> Drink Now
                 
       </div>
 </button>
-        <button name="choose" value="750" type="submit" class="button button2">      
+        <button name="choose" value="150" type="submit" class="button button2">      
           <div class="w3-container w3-blue w3-padding-16">
         <div class="w3-left"><i class="fa fa-tint w3-xxxlarge"></i></div>
         <div class="w3-right">
-          <h3>750 mL</h3>
+          <h3>1.5 Litre</h3>
         </div>
         <div class="w3-clear"></div>
         <h4>Drinking Water</h4>
-        <h2>Tsh 750</h2>
+        <h2>Tsh 150</h2>
 
                     <i class="fa fa-glass"></i> Drink Now
                 
       </div>
 </button>
-<button name="choose" value="1000" type="submit" class="button button2">
+<button name="choose" value="100" type="submit" class="button button2">
       <div class="w3-container w3-indigo w3-text-white w3-padding-16">
         <div class="w3-left"><i class="fa fa-tint w3-xxxlarge"></i></div>
         <div class="w3-right">
-          <h3>1 Litre</h3>
+          <h3>2 Litre</h3>
         </div>
         <div class="w3-clear"></div>
         <h4>Drinking Water</h4>
-        <h2>Tsh 1000</h2>
+        <h2>Tsh 200</h2>
         <i class="fa fa-glass"></i> Drink Now
       </div>
   </div>
